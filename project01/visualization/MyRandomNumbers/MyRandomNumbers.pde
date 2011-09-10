@@ -29,7 +29,7 @@ void setup() {
 //    for(int i=0; i<numbers.length; i++){
 //      ellipse(ceil(random(0,99))*8, height/2 + 20, 8, 8);
 //    }
-    bargraph(numbers, 400);
+    bargraph(numbers, 100);
 }
 
 void bargraph(int[] nums, float y){
@@ -45,6 +45,8 @@ void bargraph(int[] nums, float y){
   
   //Draw bar graph
   for(int i=0; i<counts.length; i++){
+    colorMode(HSB);
+    fill(counts[i]*30, 255, 255);
     rect(i*8,y,8,-counts[i]*10);
   }
 }
