@@ -21,14 +21,32 @@ void setup() {
     
     fill(255,40);
     noStroke();
-    //Google numbers
-    for(int i=0; i<numbers.length; i++){
-      ellipse(numbers[i]*8, width/2, 8, 8);
-    }
-    //Random numbers
-    for(int i=0; i<numbers.length; i++){
-      ellipse(ceil(random(0,99))*8, height/2 + 20, 8, 8);
-    }
+//    //Google numbers
+//    for(int i=0; i<numbers.length; i++){
+//      ellipse(numbers[i]*8, width/2, 8, 8);
+//    }
+//    //Random numbers
+//    for(int i=0; i<numbers.length; i++){
+//      ellipse(ceil(random(0,99))*8, height/2 + 20, 8, 8);
+//    }
+    bargraph(numbers, 400);
+}
+
+void bargraph(int[] nums, float y){
+  int[] counts = new int[100];
+  //Seems like there's a better way to do this, but okay...
+  //The example seem to be leaving out the first number item in the array, I don't.
+  for(int i=0; i<100; i++){
+    counts[i]=0;
+  }
+  for(int i=0;i<nums.length; i++){
+    counts[nums[i]]++;
+  }
+  
+  //Draw bar graph
+  for(int i=0; i<counts.length; i++){
+    rect(i*8,y,8,-counts[i]*10);
+  }
 }
 
 void draw() {
