@@ -16,9 +16,17 @@ void setup() {
     background(0);
     smooth();
 
+    //Acquire numbers from google doc
+    int numbers[] = getNumbers()
 }
 
 void draw() {
   //This code happens once every frame.
+  fill(255,40);
+  noStroke();
+  
+  for(int i=0; i<numbers.length; i++){
+    ellipse(numbers[i]*8, width/2, 8, 8);
+  }
 }
 
