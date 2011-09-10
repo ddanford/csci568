@@ -17,16 +17,17 @@ void setup() {
     smooth();
 
     //Acquire numbers from google doc
-    int numbers[] = getNumbers()
+    int numbers[] = getNumbers();
+    
+    fill(255,40);
+    noStroke();
+    //Google numbers
+    for(int i=0; i<numbers.length; i++){
+      ellipse(numbers[i]*8, width/2, 8, 8);
+    }
 }
 
 void draw() {
   //This code happens once every frame.
-  fill(255,40);
-  noStroke();
-  
-  for(int i=0; i<numbers.length; i++){
-    ellipse(numbers[i]*8, width/2, 8, 8);
-  }
 }
 
