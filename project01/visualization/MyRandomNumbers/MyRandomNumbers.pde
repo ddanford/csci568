@@ -29,16 +29,37 @@ void setup() {
 //    for(int i=0; i<numbers.length; i++){
 //      ellipse(ceil(random(0,99))*8, height/2 + 20, 8, 8);
 //    }
-    bargraph(numbers, 100);
-    
-    for(int i=1; i<7; i++){
-      int[] randoms = getRandomNumbers(225);
-      bargraph(randoms, 100 + (i*130));
-    }
+//    barGraph(numbers, 100);
+//    
+//    for(int i=1; i<7; i++){
+//      int[] randoms = getRandomNumbers(225);
+//      barGraph(randoms, 100 + (i*130));
+//    }
+
+    colorGrid(numbers, 50, 50, 70);
     
 }
 
-void bargraph(int[] nums, float y){
+void colorGrid(int[] nums, float x, float y, float s){
+  int[] counts = new int[100];
+  for(int i=0; i<100; i++){
+    counts[i]=0;
+  }
+  for(int i=0;i<nums.length; i++){
+    counts[nums[i]]++;
+  }
+  
+  pushMatrix();
+  translate(x,y);
+  for(int i=0; i<counts.length; i++){
+    colorMode(HSB);
+    fill(counts[i]*30,255,255,counts[i]*30);
+    rect((i%10)*s, floor(i/10)*s,s,s);
+  }
+  popMatrix();
+}
+
+void barGraph(int[] nums, float y){
   int[] counts = new int[100];
   //Seems like there's a better way to do this, but okay...
   //The example seem to be leaving out the first number item in the array, I don't.
