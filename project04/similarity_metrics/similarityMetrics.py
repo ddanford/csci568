@@ -1,4 +1,5 @@
-
+import random
+from math import sqrt
 
 def euclidean(subject, target):
 	if type(subject) != type([]) or type(target) != type([]):
@@ -21,20 +22,20 @@ def smc(subject, target):
 	if len(subject) != len(target):
 		print 'Paramters must have the same number of attributes.\n'
 		return
-	num00 = 0
-	num01 = 0
-	num10 = 0
-	num11 = 0
+	num00 = 0.0
+	num01 = 0.0
+	num10 = 0.0
+	num11 = 0.0
 	for attr in range(0,len(subject)):
-		if subject[attr]==0 and target[attr]==0:
-			num00++
-		elif subject[attr]==0 and target[attr]==1:
-			num01++
-		elif subject[attr]==1 and target[attr]==0:
-			num10++
-		elif subject[attr]==1 and target[attr]==1:
-			num11++
-	
+		if int(subject[attr])==0 and int(target[attr])==0:
+			num00+= 1
+		elif int(subject[attr])==0 and int(target[attr])==1:
+			num01+= 1
+		elif int(subject[attr])==1 and int(target[attr])==0:
+			num10+= 1
+		elif int(subject[attr])==1 and int(target[attr])==1:
+			num11+= 1
+		
 	similarity = (num00+num11)/len(subject)
 	return similarity
 
@@ -45,19 +46,19 @@ def jaccard(subject, target):
 	if len(subject) != len(target):
 		print 'Paramters must have the same number of attributes.\n'
 		return
-	num00 = 0
-	num01 = 0
-	num10 = 0
-	num11 = 0
+	num00 = 0.0
+	num01 = 0.0
+	num10 = 0.0
+	num11 = 0.0
 	for attr in range(0,len(subject)):
-		if subject[attr]==0 and target[attr]==0:
-			num00++
-		elif subject[attr]==0 and target[attr]==1:
-			num01++
-		elif subject[attr]==1 and target[attr]==0:
-			num10++
-		elif subject[attr]==1 and target[attr]==1:
-			num11++
+		if int(subject[attr])==0 and int(target[attr])==0:
+			num00+= 1
+		elif int(subject[attr])==0 and int(target[attr])==1:
+			num01+= 1
+		elif int(subject[attr])==1 and int(target[attr])==0:
+			num10+= 1
+		elif int(subject[attr])==1 and int(target[attr])==1:
+			num11+= 1
 	
 	similarity = num11/(num01+num10+num11)
 	return similarity
@@ -85,7 +86,7 @@ def pearson(subject, target):
 	pcc = 0
 	for attr in range(0,len(subject)):
 		pcc = (subject[attr]-sbar)/sstd*(target[attr]-tbar)/tstd
-	pcc = (len(subject)-1)*pcc
+	pcc = pcc/(len(subject)-1)
 	return pcc
 
 def cosine(subject, target):
@@ -107,7 +108,18 @@ def cosine(subject, target):
 	similarity = dot/(mags*magt)
 	return similarity
 	
-	
-	
-	
-	
+def rrr():
+	return round(random.random())
+
+subject = [rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr()]
+target = [rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr()]
+
+print 'Subject is '
+print subject
+print '\nTarget is '
+print target
+print '\nEuclidean distance is ' + str(euclidean(subject, target))
+print 'Simple Matching Coefficient is ' + str(smc(subject, target))
+print 'Jaccard coefficient is ' + str(jaccard(subject, target))
+print 'Pearson Corelation Coefficient is ' + str(pearson(subject, target))
+print 'Cosine similarity is ' + str(cosine(subject, target))
