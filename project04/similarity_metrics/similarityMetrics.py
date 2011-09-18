@@ -66,10 +66,10 @@ def jaccard(subject, target):
 def stdev(list):
 	mean = sum(list)/len(list)
 	std = 0
-	for l in list:
-		std += (l-mean)**2
+	for i in range(0,len(list)):
+		std += (list[i]-mean)**2
 	
-	std = sqrt(std/len(list))
+	std = sqrt(std/(len(list)-1.0))
 	return std
 	
 def pearson(subject, target):
@@ -85,7 +85,7 @@ def pearson(subject, target):
 	tstd = stdev(target)
 	pcc = 0
 	for attr in range(0,len(subject)):
-		pcc = (subject[attr]-sbar)/sstd*(target[attr]-tbar)/tstd
+		pcc += (subject[attr]-sbar)/sstd*(target[attr]-tbar)/tstd
 	pcc = pcc/(len(subject)-1)
 	return pcc
 
@@ -111,10 +111,30 @@ def cosine(subject, target):
 def rrr():
 	return round(random.random())
 
+def test():
+	if euclidean([0,0],[3,4]) != 5:
+		print 'Problem with Euclidean!'
+		print euclidean([0,0],[3,4])
+	if smc([0,0,1],[0,0,1]) != 1:
+		print 'Problem with SMC!'
+		print smc([0,0,1],[0,0,1])
+	if jaccard([0,1,1],[0,1,0]) != .5:
+		print 'Problem with Jaccard!'
+		print jaccard([0,1,1],[0,1,0])
+	if round(pearson([1.0,3.0,4.0,6.0],[8.0,7.0,5.0,10.0]),5) != 0.30769:
+		print '\nProblem with Pearson!'
+		print pearson([1.0,3.0,4.0,6.0],[8.0,7.0,5.0,10.0])
+	if round(cosine([1.0,3.0,4.0,6.0],[8.0,7.0,5.0,10.0]),5) != 0.89731:
+		print '\nProblem with Cosine!'
+		print cosine([1.0,3.0,4.0,6.0],[8.0,7.0,5.0,10.0])
+	
+
 subject = [rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr()]
 target = [rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr()]
 
-print 'Subject is '
+test()
+
+print '\nSubject is '
 print subject
 print '\nTarget is '
 print target
