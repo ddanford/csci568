@@ -123,9 +123,9 @@ def roundedRandom():
 	return round(random.random())
 
 def test():
-	if euclidean([0,0],[3,4]) != 5:
+	if round(euclidean([1.0,3.0,4.0,6.0],[8.0,7.0,5.0,10.0]),5) != 0.09945:
 		print 'Problem with Euclidean!'
-		print euclidean([0,0],[3,4])
+		print euclidean([1.0,3.0,4.0,6.0],[8.0,7.0,5.0,10.0])
 	if smc([0,0,1],[0,0,1]) != 1:
 		print 'Problem with SMC!'
 		print smc([0,0,1],[0,0,1])
@@ -135,7 +135,7 @@ def test():
 	if round(pearson([1.0,3.0,4.0,6.0],[8.0,7.0,5.0,10.0]),5) != 0.30769:
 		print '\nProblem with Pearson!'
 		print pearson([1.0,3.0,4.0,6.0],[8.0,7.0,5.0,10.0])
-	if round(cosine([1.0,3.0,4.0,6.0],[8.0,7.0,5.0,10.0]),5) != 0.89731:
+	if round(cosine([1.0,3.0,4.0,6.0],[8.0,7.0,5.0,10.0]),5) != 0.94865:
 		print '\nProblem with Cosine!'
 		print cosine([1.0,3.0,4.0,6.0],[8.0,7.0,5.0,10.0])
 	
