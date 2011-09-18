@@ -8,7 +8,7 @@ def euclidean(subject, target):
 		print 'Paramters must have the same number of attributes.\n'
 		return
 	distance = 0
-	for attr in range(0:len(subject)):
+	for attr in range(0,len(subject)):
 		distance += (subject[attr]-target[attr])**2
 	
 	distance = sqrt(distance)
@@ -25,7 +25,7 @@ def smc(subject, target):
 	num01 = 0
 	num10 = 0
 	num11 = 0
-	for attr in range(0:len(subject)):
+	for attr in range(0,len(subject)):
 		if subject[attr]==0 and target[attr]==0:
 			num00++
 		elif subject[attr]==0 and target[attr]==1:
@@ -49,7 +49,7 @@ def jaccard(subject, target):
 	num01 = 0
 	num10 = 0
 	num11 = 0
-	for attr in range(0:len(subject)):
+	for attr in range(0,len(subject)):
 		if subject[attr]==0 and target[attr]==0:
 			num00++
 		elif subject[attr]==0 and target[attr]==1:
@@ -83,7 +83,7 @@ def pearson(subject, target):
 	sstd = stdev(subject)
 	tstd = stdev(target)
 	pcc = 0
-	for attr in range(0:len(subject)):
+	for attr in range(0,len(subject)):
 		pcc = (subject[attr]-sbar)/sstd*(target[attr]-tbar)/tstd
 	pcc = (len(subject)-1)*pcc
 	return pcc
@@ -95,4 +95,19 @@ def cosine(subject, target):
 	if len(subject) != len(target):
 		print 'Paramters must have the same number of attributes.\n'
 		return
-
+	dot = 0
+	mags = 0
+	magt = 0
+	for attr in range(0,len(subject)):
+		dot += subject[attr]*target[attr]
+		mags += subject[attr]**2
+		magt += target[attr]**2
+	mags = sqrt(mags)
+	magt = sqrt(magt)
+	similarity = dot/(mags*magt)
+	return similarity
+	
+	
+	
+	
+	
