@@ -1,6 +1,8 @@
 import random
 from math import sqrt
 
+#Find the Euclidean (linear) distance between two data objects
+#Returns a number in the range [0,1]
 def euclidean(subject, target):
 	if type(subject) != type([]) or type(target) != type([]):
 		print 'Parameters must both be lists of attributes.\n'
@@ -13,8 +15,10 @@ def euclidean(subject, target):
 		distance += (subject[attr]-target[attr])**2
 	
 	distance = sqrt(distance)
-	return distance
+	return 1/(1+distance)
 	
+#Find the Simple Matching Coefficient
+#This value will always be in the range [0,1]
 def smc(subject, target):
 	if type(subject) != type([]) or type(target) != type([]):
 		print 'Parameters must both be lists of attributes.\n'
@@ -39,6 +43,8 @@ def smc(subject, target):
 	similarity = (num00+num11)/len(subject)
 	return similarity
 
+#Find the Jaccard Similarity
+#This value will always be in the range [0,1]
 def jaccard(subject, target):
 	if type(subject) != type([]) or type(target) != type([]):
 		print 'Parameters must both be lists of attributes.\n'
@@ -63,6 +69,7 @@ def jaccard(subject, target):
 	similarity = num11/(num01+num10+num11)
 	return similarity
 
+#Standard Deviation function for use in Pearson Correlation
 def stdev(list):
 	mean = sum(list)/len(list)
 	std = 0
@@ -72,6 +79,8 @@ def stdev(list):
 	std = sqrt(std/(len(list)-1.0))
 	return std
 	
+#Find Pearson Correlation Coefficient
+#Returns a value in the range [-1,1]
 def pearson(subject, target):
 	if type(subject) != type([]) or type(target) != type([]):
 		print 'Parameters must both be lists of attributes.\n'
@@ -89,6 +98,8 @@ def pearson(subject, target):
 	pcc = pcc/(len(subject)-1)
 	return pcc
 
+#Find the Cosine Similarity
+#Returns a value in the range [0,1]
 def cosine(subject, target):
 	if type(subject) != type([]) or type(target) != type([]):
 		print 'Parameters must both be lists of attributes.\n'
@@ -106,9 +117,9 @@ def cosine(subject, target):
 	mags = sqrt(mags)
 	magt = sqrt(magt)
 	similarity = dot/(mags*magt)
-	return similarity
+	return (similarity+1)/2
 	
-def rrr():
+def roundedRandom():
 	return round(random.random())
 
 def test():
@@ -129,8 +140,8 @@ def test():
 		print cosine([1.0,3.0,4.0,6.0],[8.0,7.0,5.0,10.0])
 	
 
-subject = [rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr()]
-target = [rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr(), rrr()]
+subject = [roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom()]
+target = [roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom()]
 
 test()
 
