@@ -140,17 +140,18 @@ def test():
 		print cosine([1.0,3.0,4.0,6.0],[8.0,7.0,5.0,10.0])
 	
 
-subject = [roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom()]
-target = [roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom()]
+if __name__ == "__main__":
+	subject = [roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom()]
+	target = [roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom(), roundedRandom()]
 
-test()
+	test()
 
-print '\nSubject is '
-print subject
-print '\nTarget is '
-print target
-print '\nEuclidean distance is ' + str(euclidean(subject, target))
-print 'Simple Matching Coefficient is ' + str(smc(subject, target))
-print 'Jaccard coefficient is ' + str(jaccard(subject, target))
-print 'Pearson Corelation Coefficient is ' + str(pearson(subject, target))
-print 'Cosine similarity is ' + str(cosine(subject, target))
+	print '\nSubject is '
+	print subject
+	print '\nTarget is '
+	print target
+	print '\nEuclidean distance is ' + str(euclidean(subject, target))
+	print 'Simple Matching Coefficient is ' + str(smc(subject, target))
+	print 'Jaccard coefficient is ' + str(jaccard(subject, target))
+	print 'Pearson Corelation Coefficient is ' + str(pearson(subject, target))
+	print 'Cosine similarity is ' + str(cosine(subject, target))
