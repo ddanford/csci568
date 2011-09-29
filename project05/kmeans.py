@@ -101,7 +101,6 @@ def kmeans(k, dataobjects, similarityMetric):
 	# print minAttrs,'Double raage'
 	
 	centroids = randomCentroidPoints(k, dataobjects, numAttr)
-	print centroids
 	clusters = assignObjects(dataobjects, similarityMetric, centroids)
 	
 	changing = True
@@ -119,16 +118,18 @@ def kmeans(k, dataobjects, similarityMetric):
 		
 		clusters = newclusters
 		it += 1
+		
+	for i in range(0,k):
+		print "Centroid: ",centroids[i],"\nObjects in cluster: ",len(clusters[i]),"\nCluster SSE: ",sse(clusters[i],centroids[i])
 	
 	return clusters
 	
-def sse(cluster):
-	if len(cluster) == 0:
-		return 0
-	numAttrs = cluster[0]
+def sse(cluster, centroid):
+	error = 0
+	for obj in cluster:
+		for i in range(0,len(centroid)):
+			error += (obj[i] - centroid[i])**2
+	return error
 	
 dataset = read_csv('iris.csv')
 clusters = kmeans(3,dataset,euclidean)
-print len(clusters[0])
-print len(clusters[1])
-print len(clusters[2])
