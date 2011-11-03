@@ -11,12 +11,15 @@ class Node:
 		
 	#Returns this nodes contribution to the next layer, or it's value if there is no next layer
 	def getResults(self):
-		if len(self.weights) == 0:
-			return self.value
 		return [self.value*w for w in self.weights]
 		
 	#Fixes the weights based on error from the next layer, a is the learning rate
-	def adjustWeights(self, error, a=0.1):
+	#Returns the error of this node
+	def train(self, error, a=0.1):
 		if len(error) != len(self.weights):
-			return -1
-		self.weights = [self.weights[i] - a*error[i]*self.value for i in range(0, len(weights))]
+			print("Invalid length of errors.")
+			quit()
+		tempweights = [self.weights[i] - a*error[i]*self.value for i in range(0, len(weights))]
+		error = sum([self.weights[i]-tempweights[i] for i in range(0,len(self.weights))])
+		self.weights = tempweights
+		return error
