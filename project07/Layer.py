@@ -1,16 +1,21 @@
+import Node
+
 class Layer:
 	def __init__(self, size, nextLayerSize):
-		self.nodes = [node(nextLayerSize) for i in range(0,size)]
+		self.nodes = [Node.Node(nextLayerSize) for i in range(0,size)]
 		self.outputSize = nextLayerSize
 	
+	#Sets the values of nodes in this layer
+	#Called from Network with the results of the previous layer or the input to the NN
 	def setNodeValues(self, values):
 		if(len(values) != len(self.nodes)):
 			print("Invalid number of values.")
 			quit()
 		for i in range(0, len(self.nodes)):
-			self.nodes[i] = values[i]
+			self.nodes[i].setValue(values[i])
 	
 	#Calculates the values for the next layer from its nodes
+	#Called from Network to be used as an input to the next Layer's setNodeValues or as output of the NN
 	def getResults(self):
 		results = []
 		for i in range(0,self.outputSize):
