@@ -3,7 +3,7 @@ import random
 class Node:
 	def __init__(self, nextLayerSize):
 		self.value = 0.0
-		self.weights = [random.random()*2-1 for i in range(0,nextLayerSize]
+		self.weights = [random.random()*2-1 for i in range(0,nextLayerSize)]
 	
 	#Sets the value of the node, used when calculating the value of nodes in the next layer
 	def setValue(self, newV):
