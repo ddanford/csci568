@@ -6,4 +6,6 @@ The Layer class is the middle layer of abstraction.  It accepts its size, and th
 
 Nodes take a value in (from its layer) and outputs a list of its impact on the next layer.  It multiplies its value by the values of its weights.
 
-The driver file project7.py can be run without any command line parameters.  At creation, all weights are initialized to random values, so until training is implemented, the output will be different every time.
+The driver file project7.py can be run without any command line parameters.  At creation, all weights are initialized to random values, so unless training is called, the output will be different every time.
+
+For time's sake, I added a precision variable that describes how many decimal places the result should be rounded to.  By default, the precision is higher during output than during classification.  Training rounds to 12 decimal places by default, and reular usage rounds to 10 decimal places by default.

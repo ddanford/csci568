@@ -16,13 +16,13 @@ class Layer:
 	
 	#Calculates the values for the next layer from its nodes
 	#Called from Network to be used as an input to the next Layer's setNodeValues or as output of the NN
-	def getResults(self):
+	def getResults(self,precision=10):
 		results = []
 		for i in range(0,self.outputSize):
 			sum = 0.0
 			for j in range(0,len(self.nodes)):
 				sum = sum + self.nodes[j].getResults()[i]
-			results.append(sum)
+			results.append(round(sum,precision))
 		return results
 		
 	#Fixes the weights of each node based on the error of the next layer

@@ -19,7 +19,7 @@ class Node:
 		if len(error) != len(self.weights):
 			print("Invalid length of errors.")
 			quit()
-		tempweights = [self.weights[i] - a*error[i]*self.value for i in range(0, len(weights))]
+		tempweights = [self.weights[i] + a*error[i]*self.value for i in range(0, len(self.weights))]
 		error = sum([self.weights[i]-tempweights[i] for i in range(0,len(self.weights))])
 		self.weights = tempweights
 		return error
