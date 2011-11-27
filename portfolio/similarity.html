@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <title>Similarity Metrics</title>
+  </head>
+  <body>
+    <h1>Similarity Metrics</h1>
+    <h3>Similarity</h3>
+    <p>When a data miner says two objects are similar, he probably selected and ran one of a multitude of Similarity Metrics.  Most similarity metrics return a value that rates their similarity.  It's important to keep in mind the range of the metric if it's not normalized.  A normalized metric will usually return a value between zero and one, with one being equality and zero being complete dissimilarity.  However, some metrics aren't always normalized.  For example, a Euclidean distance metric might not be normalized, and could produce extremely large distances if two objects are very dissimilar.</p>
+    <p>Determining how similar, or dissimilar, two objects are depends heavily on the types of attributes that define it, and if the dataset is synchronous or asynchronous.  One method of comparison may work well for objects defined entirely by binary attributes, but work poorly (or not at all) on continuous attributes.  Below are descriptions and python implementations for some normalized similarity metrics.</p>
+    <h3>Euclidean Distance</h3>
+    <p>Euclidean distance should be familiar to most people who've taken an algebra or geometry course.  It's essentially just the linear distance between two points in space.  Just as &radic;(x<sup>2</sup> + y<sup>2</sup>) can be expanded to three dimensions as &radic;(x<sup>2</sup> + y<sup>2</sup> + z<sup>2</sup>), it can be expanded to any number of dimensions.  Following is a python example of how a normalized Euclidean distance would work.</p>
+	<pre>
+	distance = 0
+	for attr in range(0,len(subject)):
+		distance += (subject[attr]-target[attr])**2
+	
+	distance = sqrt(distance)
+	return 1/(1+distance)
+	</pre>
+    <h3>Simple Matching Coefficient</h3>
+    <p>The Simple Matching Coefficient is designed to work well on sychronous, binary datasets.  It simply counts the number of attributes that are the same for both objects, and divides it by the total number of attributes.  For asynchronous binary datasets, Jaccard is more appropriate, and operates in a similar manner.  Shown below is a simple implementation in python.</p>
+	<pre>
+	num00 = 0.0
+	num01 = 0.0
+	num10 = 0.0
+	num11 = 0.0
+	for attr in range(0,len(subject)):
+		if int(subject[attr])==0 and int(target[attr])==0:
+			num00+= 1
+		elif int(subject[attr])==0 and int(target[attr])==1:
+			num01+= 1
+		elif int(subject[attr])==1 and int(target[attr])==0:
+			num10+= 1
+		elif int(subject[attr])==1 and int(target[attr])==1:
+			num11+= 1
+	similarity = (num00+num11)/len(subject)
+	return similarity
+	</pre>
+    <h3>Jaccard Similarity</h3>
+    <p>As mentioned above, Jaccard similarity is very similar (no pun intended) to the Simple Matching Coefficient.  However, it is more appropriate for asynchronous data.  Because of this, it counts only the matching of the less common (and therefore more important) attribute, and only divides the total by the number of attributes for which one of the compared objects has a one.  For example, in market basket data the items that are purchased are far rarer than the items that aren't purchased, and so we're more interested in the values with a one.  Given below is a simple Jaccard implementation in python.</p>
+	<pre>
+	num00 = 0.0
+	num01 = 0.0
+	num10 = 0.0
+	num11 = 0.0
+	for attr in range(0,len(subject)):
+		if int(subject[attr])==0 and int(target[attr])==0:
+			num00+= 1
+		elif int(subject[attr])==0 and int(target[attr])==1:
+			num01+= 1
+		elif int(subject[attr])==1 and int(target[attr])==0:
+			num10+= 1
+		elif int(subject[attr])==1 and int(target[attr])==1:
+			num11+= 1
+	
+	similarity = num11/(num01+num10+num11)
+	return similarity
+	</pre>
+    <h3>To Infinity and Beyond</h3>
+    <p>These are just some of the available similarity metrics.  Many more exist, and some are created specifically for a dataset or domain of data.</p>
+  </body>
+</html>
