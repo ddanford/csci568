@@ -1,18 +1,31 @@
 <html>
   <head>
     <title>Application: The Classic Mushroom Dataset</title>
+    <meta name="keywords" content="Data Mining" />
+    <meta name="description" content="Data Mining" />
+    <meta name="author" content="David Danford" />
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print" />
+    <link rel="stylesheet" href="css/main.css" type="text/css" media="screen" /> 
+    <!--[if IE]>
+      <link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection">
+    <![endif]-->
   </head>
   <body>
-    <h1>Application: The Classic Mushroom Dataset</h1>
-    <h3>Summary Statistics</h3>
-    <p>The first step is to become familiar with the data.  Weka Explorer is useful for exploring the data (as you might expect from an Explorer!).  Weka automatically generates relevant summary statistics, though in the case of the Mushroom data this only includes counts or percentages because most of the attributes are nominal.  It also shows that veil-type is always partial!  And color is almost always white.</p>
-    <h3>Clusters</h3>
-    <p>Cluster analysis on the data using Weka's K-means clusterer results in 41% and 59% in the two clusters (if you ignore the poisonous/edible attribute).  The actual edible/poisonous distribution is 38%/62%.  So this cluster algorithm actually puts some edible into the cluster with poisonous and unknown edibility.  This clustering would be playing it safe.</p>
-    <h3>Classification</h3>
-    <p>Because of the format of the data, it seems like a rule based classifier would work well.  In Weka, JRip can get to 100% accuracy with rules.  I picked JRip because it sounded familiar, while none of the others sounded like an algorithm I remember being mentioned (except DecisionTable, which I thought was odd, so I avoided it).  This would make me much more comfortable with living in the wilderness alone with my MacBook.</p>
-    <h3>Anomaly Detection</h3>
-    <p>Anomaly detection seems a little odd for this domain.  Since we have data that is unknown but classified as poisonous, any of these points might show up as anomalies when considering poisonous/edible in the anomaly detection algorithms.  When running DBScan with epsilon of 1.5 and min points of 6, I found sixteen noise points.  These may or may not be anomalous, due to the 'missing' information.</p>
-    <h3>Association Analysis</h3>
-    <p>Lots of associations rules can be generated!  In Weka, Using Apriori in Weka, I was able to generate 100,000 with confidence of 1.  However, most of these are not useful for determining if the mushrooms are poisonous.  There are a few that stand out as useful, however.  If the mushroom smells foul, don't eat it!  (Who would eat something that is described as smelling foul, anyway?)  There's also a fairly strong association (confidence is .97) that mushrooms with no smell are edible.  In conjunction with several other attributes, there are rules with confidence of 1 for being edible.  These are probably the same (or similar to) rules created by JRip.</p>
+    <div class="container">
+      <h1>Application: The Classic Mushroom Dataset</h1>
+      <h3>Summary Statistics</h3>
+      <p>The first step is to become familiar with the data.  Weka Explorer is useful for exploring the data (as you might expect from an Explorer!).  Weka automatically generates relevant summary statistics, though in the case of the Mushroom data this only includes counts or percentages because most of the attributes are nominal.  It also shows that veil-type is always partial!  And color is almost always white.</p>
+      <h3>Clusters</h3>
+      <p>Cluster analysis on the data using Weka's K-means clusterer results in 41% and 59% in the two clusters (if you ignore the poisonous/edible attribute).  The actual edible/poisonous distribution is 38%/62%.  So this cluster algorithm actually puts some edible into the cluster with poisonous and unknown edibility.  This clustering would be playing it safe.</p>
+      <h3>Classification</h3>
+      <p>Because of the format of the data, it seems like a rule based classifier would work well.  In Weka, JRip can get to 100% accuracy with rules.  I picked JRip because it sounded familiar, while none of the others sounded like an algorithm I remember being mentioned (except DecisionTable, which I thought was odd, so I avoided it).  This would make me much more comfortable with living in the wilderness alone with my MacBook.</p>
+      <h3>Anomaly Detection</h3>
+      <p>Anomaly detection seems a little odd for this domain.  Since we have data that is unknown but classified as poisonous, any of these points might show up as anomalies when considering poisonous/edible in the anomaly detection algorithms.  When running DBScan with epsilon of 1.5 and min points of 6, I found sixteen noise points.  These may or may not be anomalous, due to the 'missing' information.</p>
+      <h3>Association Analysis</h3>
+      <p>Lots of associations rules can be generated!  In Weka, Using Apriori in Weka, I was able to generate 100,000 with confidence of 1.  However, most of these are not useful for determining if the mushrooms are poisonous.  There are a few that stand out as useful, however.  If the mushroom smells foul, don't eat it!  (Who would eat something that is described as smelling foul, anyway?)  There's also a fairly strong association (confidence is .97) that mushrooms with no smell are edible.  In conjunction with several other attributes, there are rules with confidence of 1 for being edible.  These are probably the same (or similar to) rules created by JRip.</p>
+    </div>
   </body>
 </html>

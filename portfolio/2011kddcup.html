@@ -1,24 +1,37 @@
 <html>
 	<head>
 		<title>KDD Cup Challenge Track 1</title>
+		<meta name="keywords" content="Data Mining KDD" />
+		<meta name="description" content="Data Mining application, KDD Cup Challenge." />
+		<meta name="author" content="David Danford" />
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection" />
+		<link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print" />
+		<link rel="stylesheet" href="css/main.css" type="text/css" media="screen" /> 
+		<!--[if IE]>
+		  <link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection">
+		<![endif]-->
 	</head>
 	<body>
-		<h3>Data – Familiarization and Preprocessing</h3>
-		<p>The first step in any data mining process is familiarizing yourself with the data.  This dataset is split up similar to how an object oriented programmer or database administrator might think of it.  Because it's already designed similar to how a database is set up, reading it into a database is the next logical step.  This preprocessing will allow querying about different aspects of the data easily.  Unfortunately, getting it into the database took a lot of effort (and two or three hours of time).</p>
+		<div class="container">
+			<h3>Data – Familiarization and Preprocessing</h3>
+			<p>The first step in any data mining process is familiarizing yourself with the data.  This dataset is split up similar to how an object oriented programmer or database administrator might think of it.  Because it's already designed similar to how a database is set up, reading it into a database is the next logical step.  This preprocessing will allow querying about different aspects of the data easily.  Unfortunately, getting it into the database took a lot of effort (and two or three hours of time).</p>
 
-		<h3>Data - Statistics</h3>
-		<p>Now that the database exists, querying for some things is simple.  We can tell how the ratings are distributed between the different object types (albums=1391, artists=2487, genres=479, tracks=7295), or what the average rating is for each user (select user_id, avg(rating) from ratings group by user_id), or the average rating of tracks from a specific genre by user.  In this way, we can come up with some summary statistics that describe the data and help us become more familiar with the dataset.</p>
+			<h3>Data - Statistics</h3>
+			<p>Now that the database exists, querying for some things is simple.  We can tell how the ratings are distributed between the different object types (albums=1391, artists=2487, genres=479, tracks=7295), or what the average rating is for each user (select user_id, avg(rating) from ratings group by user_id), or the average rating of tracks from a specific genre by user.  In this way, we can come up with some summary statistics that describe the data and help us become more familiar with the dataset.</p>
 
-		<h3>Clustering</h3>
-		<p>While it might be useful to cluster some objects (like similar users, or similar tracks) this might require quite a bit more preprocessing, and designing a specific Similarity Metric for this data.  To determine if users are similar, for example, we would want to compare their ratings only when both users rated an object.  In this way, it resembles Jaccard, but the data is not binary.  So we could create a Similarity Metric that combines Euclidean Distance and Jaccard.</p>
-		<p>We could cluster tracks based on having similar genres.  So we would have to do a little more preprocessing to create a list of all tracks/albums with a binary attribute for every genre (992), and run a clustering algorithm on the tracks to find (Jaccard) similar tracks/albums.  If we get the genres for every track and album the artist is associated with, we could generate the same table for artists.  We could even combine them all into one table, and cluster the tracks, albums, and artists based on their genres.</p>
+			<h3>Clustering</h3>
+			<p>While it might be useful to cluster some objects (like similar users, or similar tracks) this might require quite a bit more preprocessing, and designing a specific Similarity Metric for this data.  To determine if users are similar, for example, we would want to compare their ratings only when both users rated an object.  In this way, it resembles Jaccard, but the data is not binary.  So we could create a Similarity Metric that combines Euclidean Distance and Jaccard.</p>
+			<p>We could cluster tracks based on having similar genres.  So we would have to do a little more preprocessing to create a list of all tracks/albums with a binary attribute for every genre (992), and run a clustering algorithm on the tracks to find (Jaccard) similar tracks/albums.  If we get the genres for every track and album the artist is associated with, we could generate the same table for artists.  We could even combine them all into one table, and cluster the tracks, albums, and artists based on their genres.</p>
 
-		<h3>Classification</h3>
-		<p>As discussed in the clustering section, we can group things tracks, albums and artists based on the genres they're associated with.  If we add in the ratings, we can generate a KNN classifier.  If a person has rated lots of things with the country genre extremely high, and several things with the rap genre extremely low, something with country and rap might be middling and a bit on the high side.  The disadvantage here is that a separate classifier would need to be generated for each user.</p>
-		<p>An alternative is to run a KNN classifier on the user.  You find the KNN of the user you're trying to get a rating for, and average those other users' ratings of the object in question.  The only disadvantage of this is the possibility that nobody similar has rated the object in question.  This would be problematic if we wanted to suggest brand new objects to users (like Amazon's “Coming Soon for You” or “New for You”).</p>
-		<p>A slight modification of the above approach would be to use a weighted average of all other users.  At some point near the middle of the similarity/dissimilarity distribution, user ratings would begin to have a negative impact on your approximated rating.  The idea being that users that are very dissimilar will like things you don't, or dislike things you like.  Again, this would suffer from few ratings of the object.</p>
+			<h3>Classification</h3>
+			<p>As discussed in the clustering section, we can group things tracks, albums and artists based on the genres they're associated with.  If we add in the ratings, we can generate a KNN classifier.  If a person has rated lots of things with the country genre extremely high, and several things with the rap genre extremely low, something with country and rap might be middling and a bit on the high side.  The disadvantage here is that a separate classifier would need to be generated for each user.</p>
+			<p>An alternative is to run a KNN classifier on the user.  You find the KNN of the user you're trying to get a rating for, and average those other users' ratings of the object in question.  The only disadvantage of this is the possibility that nobody similar has rated the object in question.  This would be problematic if we wanted to suggest brand new objects to users (like Amazon's “Coming Soon for You” or “New for You”).</p>
+			<p>A slight modification of the above approach would be to use a weighted average of all other users.  At some point near the middle of the similarity/dissimilarity distribution, user ratings would begin to have a negative impact on your approximated rating.  The idea being that users that are very dissimilar will like things you don't, or dislike things you like.  Again, this would suffer from few ratings of the object.</p>
 
-		<h3>Conclusion</h3>
-		<p>For the actual terms of the KDD cup, any of the classifiers could work.  I believe the first one would be the most accurate, or a combination of the first two, however the first one will be extremely slow since a classifier would have to be made for each user.  If you did a combination of the first two where the individual's classifier is only generated if none of the users found in the user KNN have rated the object, you can save some computation by only generating the more expensive classifier when it's needed.</p>
+			<h3>Conclusion</h3>
+			<p>For the actual terms of the KDD cup, any of the classifiers could work.  I believe the first one would be the most accurate, or a combination of the first two, however the first one will be extremely slow since a classifier would have to be made for each user.  If you did a combination of the first two where the individual's classifier is only generated if none of the users found in the user KNN have rated the object, you can save some computation by only generating the more expensive classifier when it's needed.</p>
+		</div>
 	</body>
 </html>
